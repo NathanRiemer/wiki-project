@@ -1,0 +1,9 @@
+<h1><%= @user.username %></h1>
+
+<p>Email: <%= @user.email %></p>
+
+<p>Number of articles contributed to: <%= @user.articles.uniq.count %></p>
+
+<p>Number of article edits: <%= @user.revisions.count %></p>
+
+<p>Number of comments: <%= @user.comments.count; %></p>

@@ -1,2 +1,13 @@
 <p><a href="/articles">Articles</a></p>
+
+<% if @user %>
+  <p><a href="/logout">Log Out</a></p>
+  <p><a href="/users/<%= @user.id %>">Profile</a></p>
+
+<% else %>
+  <p><a href="/login">Log In</a></p>
+  <p><a href="/signup">Create new user</a></p>
+<% end %>
+
+
 <p><a href="/users">Users</a></p>
