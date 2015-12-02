@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS articles;
 DROP TABLE IF EXISTS revisions;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS article_categories;
+DROP TABLE IF EXISTS articles_categories;
 
 CREATE TABLE users (
   id INTEGER PRIMARY KEY,
@@ -20,16 +20,17 @@ CREATE TABLE articles (
 CREATE TABLE revisions (
   id INTEGER PRIMARY KEY,
   content TEXT,
-  datetime_created DATETIME,
+  created_at DATETIME,
   user_id INTEGER REFERENCES users(id),
   article_id INTEGER REFERENCES articles(id)
 );
 
 CREATE TABLE comments (
   id INTEGER PRIMARY KEY,
-  body TEXT,
-  datetime_created DATETIME,
-  user_id INTEGER REFERENCES users(id)
+  content TEXT,
+  created_at DATETIME,
+  user_id INTEGER REFERENCES users(id),
+  revision_id INTEGER REFERENCES revisions(id)
 );
 
 CREATE TABLE categories (
@@ -37,7 +38,7 @@ CREATE TABLE categories (
   title VARCHAR
 );
 
-CREATE TABLE article_categories (
+CREATE TABLE articles_categories (
   article_id INTEGER REFERENCES articles(id),
   category_id INTEGER REFERENCES categories(id)
 );
