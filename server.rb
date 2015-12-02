@@ -18,6 +18,11 @@ module App
       redirect to "/"
     end
 
+    delete "/sessions" do
+      session[:user_id] = nil
+      redirect to "/"
+    end      
+
     get "/signup" do 
       erb :signup
     end

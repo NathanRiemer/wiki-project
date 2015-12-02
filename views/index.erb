@@ -1,8 +1,11 @@
 <p><a href="/articles">Articles</a></p>
 
 <% if @user %>
-  <p><a href="/logout">Log Out</a></p>
   <p><a href="/users/<%= @user.id %>">Profile</a></p>
+  <form method="POST" action="/sessions">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Log out">
+  </form>
 
 <% else %>
   <p><a href="/login">Log In</a></p>
