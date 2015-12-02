@@ -5,4 +5,12 @@ class Article < ActiveRecord::Base
   def current_rev
     revisions.last
   end
+
+  def last_modified_by
+    current_rev.user.username
+  end
+
+  def current_content
+    current_rev.content
+  end
 end

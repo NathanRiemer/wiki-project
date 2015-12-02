@@ -1,9 +1,9 @@
 <h1><%= @article.title %></h1>
 
 <p>Last modified: <%= @article.current_rev.created_at %></p>
-<p>Last modified by: <%= @article.current_rev.user.username %></p>
+<p>Last modified by: <%= @article.last_modified_by %></p>
 
-<p><%= @article.current_rev.content %></p>
+<p><%= @article.current_content %></p>
 
 
 <a href="/articles/<%= @article.id %>/revisions">Revisions</a>

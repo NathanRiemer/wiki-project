@@ -2,9 +2,11 @@ module App
   class Server < Sinatra::Base
     set :method_override, true
     enable :sessions
+    helpers Sinatra::LinkUtils
 
     get "/" do
       @user = User.find(session[:user_id]) if session[:user_id]
+      binding.pry
       erb :index
     end
 
