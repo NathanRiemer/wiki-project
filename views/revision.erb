@@ -1,0 +1,15 @@
+
+
+<p>Modified: <%= @revision.created_at %></p>
+<p>Modified by: <%= @revision.user.username %></p>
+
+<p><%= @revision.content %></p>
+
+<% @revision.comments.each_with_index do |comment, index| %>
+  <p>Comment <%= index + 1 %></p>
+  <p>Posted: <%= comment.created_at %></p>
+  <p>Posted by: <%= comment.user.username %></p>
+
+  <p><%= comment.content %></p>
+
+<% end %>

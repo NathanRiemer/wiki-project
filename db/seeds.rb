@@ -41,6 +41,3 @@ animals = Category.create(title: "animals")
 
 Article.find(1).categories.push(fitness)
 Article.find(2).categories.push(animals)
-
-
-binding.pry
