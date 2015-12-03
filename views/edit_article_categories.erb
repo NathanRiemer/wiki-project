@@ -1,0 +1,17 @@
+<h5>Categories:</h5>
+  <ul>
+    <% @article.categories.each do |category| %>
+      <li><%= build_link(["categories", category.id], category.title) %>
+        <form method="POST" action="<%= build_path(["articles", @article.id, "categories", category.id]) %>">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="Remove">
+        </form>
+      </li>
+    <% end %>
+  </ul>
+
+<p>Add a category to this article:</p>
+<form method="POST" action="<%= build_path(["articles", @article.id, "categories"]) %>">
+  <%= new_input("category") %>
+  <input type="submit">
+</form>

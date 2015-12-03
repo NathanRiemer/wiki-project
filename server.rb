@@ -120,6 +120,18 @@ module App
       redirect to build_path(["articles", params[:id]])
     end
 
+    get "/articles/:id/categories/edit" do 
+      @article = Article.find(params[:id])
+      erb :edit_article_categories
+    end
+
+    delete "/articles/:id/categories/:cat_id" do 
+      article = Article.find(params[:id])
+      category = Category.find(params[:cat_id])
+      article.categories.delete(category)
+      redirect to build_path(["articles", article.id])
+    end
+
     get "/categories" do 
       @user = User.current_user(session)
       @categories = Category.all.order(:title)
