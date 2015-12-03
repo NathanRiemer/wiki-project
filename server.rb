@@ -107,8 +107,16 @@ module App
     end
 
     get "/articles/:id/revisions/:rev_id" do 
+      @user = current_user
       @revision = Revision.find(params[:rev_id])
       erb :revision
+    end
+
+    post "/articles/:id/revisions/:rev_id/comments" do 
+      redirect to build_path(["articles", params[:id], "revisions", params[:rev_id]]) if !session[:user_id]
+      revision = Revision.find(params[:rev_id])
+      Comment.create(content: params[:content], created_at: DateTime.now, user_id: session[:user_id], revision_id: params[:rev_id])
+      redirect to build_path(["articles", params[:id], "revisions", params[:rev_id]])
     end
 
     post "/articles/:id/categories" do 

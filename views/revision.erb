@@ -5,11 +5,21 @@
 
 <p><%= @revision.content %></p>
 
+<h4>Comments: </h4>
 <% @revision.comments.each_with_index do |comment, index| %>
   <p>Comment <%= index + 1 %></p>
   <p>Posted: <%= comment.created_at %></p>
   <p>Posted by: <%= comment.user.username %></p>
 
   <p><%= comment.content %></p>
+
+<% end %>
+
+<% if @user %>
+  <h5>Add comment:</h5>
+  <form method="POST" action="<%= build_path(["articles", @revision.article_id, "revisions", @revision.id, "comments"]) %>">
+    <input type="text" name="content">
+    <input type="submit" value="Submit comment">
+  </form>
 
 <% end %>
