@@ -8,8 +8,14 @@ DROP TABLE IF EXISTS articles_categories;
 CREATE TABLE users (
   id INTEGER PRIMARY KEY,
   username VARCHAR,
-  password VARCHAR,
-  email VARCHAR
+  password_digest VARCHAR,
+  email VARCHAR,
+  first_name VARCHAR,
+  last_name VARCHAR,
+  avatar_image_url VARCHAR,
+  city VARCHAR,
+  state VARCHAR,
+  country VARCHAR
 );
 
 CREATE TABLE articles (

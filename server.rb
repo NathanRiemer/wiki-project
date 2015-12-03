@@ -14,7 +14,7 @@ module App
     end
 
     post "/sessions" do 
-      user = User.find_by({username: params[:username]})
+      user = User.find_by({username: params[:username]}).try(:authenticate, params[:password])
       session[:user_id] = user.id
       redirect to "/"
     end
@@ -29,8 +29,37 @@ module App
     end
 
     post "/users" do 
-      user = User.create({username: params[:username], password: params[:password], email: params[:email]})
+      user = User.create({username: params[:username], password: params[:password], password_confirmation: params[:password_confirmation], email: params[:email]})
       redirect to "/users/#{user.id}"
+    end
+
+    get "/users" do 
+      @users = User.all
+      erb :users
+    end
+
+    get "/users/:id" do 
+      @user = User.find(session[:user_id])
+      if @user.nil?
+        redirect to "/users"
+      elsif is_authenticated_user
+        erb :profile
+      else
+        @user = User.find(params[:id])
+        erb :user
+      end
+    end
+
+    get "/users/:id/edit" do 
+      redirect to "/users" if !is_authenticated_user
+      @user = User.find(params[:id])
+      erb :edit_profile
+    end
+
+    patch "/users/:id" do 
+      @user = User.find(params[:id])
+      edit_user(@user)
+      redirect to build_path(["users", @user.id])
     end
 
     get "/articles" do
@@ -66,16 +95,6 @@ module App
     get "/articles/:id/revisions/:rev_id" do 
       @revision = Revision.find(params[:rev_id])
       erb :revision
-    end
-
-    get "/users" do 
-      @users = User.all
-      erb :users
-    end
-
-    get "/users/:id" do 
-      @user = User.find(params[:id])
-      erb :user
     end
 
   end # Server

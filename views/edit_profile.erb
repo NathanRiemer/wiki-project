@@ -1,0 +1,14 @@
+<h1>Edit Profile: <%= @user.username %></h1>
+
+<form method="POST" action="<%= build_path(["users", @user.id]) %>">
+  <input type="hidden" name="_method" value="patch">
+  <%= edit_input(@user, "avatar_image_url") %>
+
+  <%= edit_input(@user, "email") %>
+  <%= edit_input(@user, "first_name") %>
+  <%= edit_input(@user, "last_name") %>
+  <%= edit_input(@user, "city") %>
+  <%= edit_input(@user, "state") %>
+  <%= edit_input(@user, "country") %>
+  <input type="submit">
+</form>

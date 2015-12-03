@@ -4,6 +4,14 @@
     <title>WIKI</title>
   </head>
   <body>
+    <div class="topbar">
+    <a href="/">Home</a>
+    <form method="POST" action="/sessions">
+      <input type="hidden" name="username" value="nathanriemer">
+      <input type="hidden" name="password" value="password">
+      <input type="submit" value="Quick Login">
+    </form>
+    </div>
     <%= yield %>
 
   </body>

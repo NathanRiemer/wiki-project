@@ -8,8 +8,8 @@ Comment.destroy_all
 Category.destroy_all
 
 users = [
-  {username: "nathanriemer", password: "pass", email: "nathan.riemer@gmail.com"},
-  {username: "someoneelse", password: "pass", email: "fake@gmail.com"}
+  {username: "nathanriemer", password: "password", email: "nathan.riemer@gmail.com"},
+  {username: "someoneelse", password: "password", email: "fake@gmail.com"}
 ]
 
 User.create(users)
