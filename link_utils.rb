@@ -19,6 +19,10 @@ module Sinatra
       session[:user_id] == params[:id].to_i
     end
 
+    def new_input (attribute)
+      "<label>#{attribute.capitalize}: <input type='text' name='#{attribute}'></label><br>"
+    end
+
     def edit_input (instance, attribute)
       "<label>#{attribute.capitalize}: <input type='text' name='#{attribute}' value='#{instance[attribute]}'></label><br>"
     end

@@ -21,4 +21,13 @@ class Article < ActiveRecord::Base
   def add_category (category_id)
     categories.push(Category.find(category_id))
   end
+
+  def created_by
+    revisions.first.user
+  end
+
+  def created_at
+    revisions.first.created_at
+  end
+
 end

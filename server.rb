@@ -98,8 +98,18 @@ module App
     end
 
     get "/categories" do 
-      @categories = Category.all
+      @user = User.current_user(session)
+      @categories = Category.all.order(:title)
       erb :categories
+    end
+
+    get "/categories/new" do            redirect to "/categories" if !session[:user_id]
+      erb :new_category
+    end
+
+    post "/categories" do 
+      category = Category.create(title: params[:title])
+      redirect to build_path(["categories", category.id])
     end
 
     get "/categories/:id" do 
