@@ -13,4 +13,12 @@ class Article < ActiveRecord::Base
   def current_content
     current_rev.content
   end
+
+  def self.create_from_params (params)
+    self.create(title: params[:title])
+  end
+
+  def add_category (category_id)
+    categories.push(Category.find(category_id))
+  end
 end

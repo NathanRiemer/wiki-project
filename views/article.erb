@@ -5,5 +5,4 @@
 
 <p><%= @article.current_content %></p>
 
-
-<a href="/articles/<%= @article.id %>/revisions">Revisions</a>
+<%= build_link(["articles", @article.id, "revisions"], "Revisions") %>

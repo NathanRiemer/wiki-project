@@ -2,7 +2,6 @@
 
 <% if @user %>
   <p><%= build_link(["users", @user.id], "Profile") %></p>
-  <p><a href="/users/<%= @user.id %>">Profile</a></p>
   <form method="POST" action="/sessions">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Log out">

@@ -1,0 +1,17 @@
+<h1>Create New Article</h1>
+
+<form method="POST" action="/articles">
+  <label>Article Title: <input type="text" name="title"></label>
+  <br>
+  <label>Content: <input type="text" size="50" name="content"></label>
+  <br>
+<!--   <label>Categories: 
+    <select name="categories" multiple="multiple">
+      <% @categories.each do | category | %>
+        <%= build_option(category.id, category.title) %>
+      <% end %>
+    </select>
+  </label>
+  <br> -->
+  <input type="submit">
+</form>

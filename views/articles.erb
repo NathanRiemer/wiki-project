@@ -2,9 +2,10 @@
 
 <ul>
   <% @articles.each do |article| %>
-    <li><a href="/articles/<%= article.id %>"><%= article.title %></a></li>
+    <li><%= build_link(["articles", article.id], article.title) %></li>
   <% end %>
 </ul>
 
-
-<p><a href="/"></a></p>
+<% if @user %>
+  <p><%= build_link(["articles", "new"], "Create New Article") %></p>
+<% end %>

@@ -5,8 +5,7 @@ module App
     helpers Sinatra::LinkUtils
 
     get "/" do
-      @user = User.find(session[:user_id]) if session[:user_id]
-      binding.pry
+      @user = User.current_user(session)
       erb :index
     end
 
@@ -35,8 +34,23 @@ module App
     end
 
     get "/articles" do
+      @user = User.current_user(session)
       @articles = Article.all
       erb :articles
+    end
+
+    get "/articles/new" do
+      redirect to "/articles" if !session[:user_id]
+      @categories = Category.all
+      erb :new_article
+    end
+
+    post "/articles" do 
+      user = User.current_user(session)
+      article = Article.create_from_params(params)
+      revision = Revision.create(content: params[:content], created_at: DateTime.now, user_id: user.id, article_id: article.id)
+      # params[:categories].each {|category_id| article.add_category(category_id) }
+      redirect to "/articles/#{article.id}"
     end
 
     get "/articles/:id" do 

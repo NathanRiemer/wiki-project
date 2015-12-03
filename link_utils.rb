@@ -7,6 +7,10 @@ module Sinatra
       "<a href='/#{path}'>#{text}</a>"
     end
 
+    def build_option (value, text)
+      "<option value='#{value}'>#{text}</option>"
+    end
+
   end
 
 end
