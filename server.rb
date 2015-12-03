@@ -97,5 +97,15 @@ module App
       erb :revision
     end
 
+    get "/categories" do 
+      @categories = Category.all
+      erb :categories
+    end
+
+    get "/categories/:id" do 
+      @category = Category.find(params[:id])
+      erb :category
+    end
+
   end # Server
 end # App

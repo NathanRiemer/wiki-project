@@ -1,0 +1,8 @@
+<h1>Categories:</h1>
+<ul>
+  <% @categories.each do | category | %>
+
+    <li><%= build_link(["categories", category.id], category.title) %></li>
+
+  <% end %>
+</ul>

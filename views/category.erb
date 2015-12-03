@@ -1,0 +1,7 @@
+<h1><%= @category.title %></h1>
+
+<ul>
+  <% @category.articles.each do |article| %>
+    <li><%= build_link(["articles", article.id], article.title) %></li>
+  <% end %>
+</ul>
