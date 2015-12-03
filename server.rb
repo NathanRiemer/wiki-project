@@ -111,6 +111,15 @@ module App
       erb :revision
     end
 
+    post "/articles/:id/categories" do 
+      article = Article.find(params[:id])
+      title = params[:category]
+      category = Category.find_by(title: title)
+      category = Category.create(title: title) if !category
+      article.categories.push(category) unless article.categories.include?(category)
+      redirect to build_path(["articles", params[:id]])
+    end
+
     get "/categories" do 
       @user = User.current_user(session)
       @categories = Category.all.order(:title)

@@ -5,6 +5,22 @@
   <p><%= @article.current_content %></p>
 </div>
 
+<div class="article-categories">
+  <h5>Categories:</h5>
+  <ul>
+    <% @article.categories.each do |category| %>
+      <li><%= build_link(["categories", category.id], category.title) %></li>
+    <% end %>
+  </ul>
+
+  <p>Add a category to this article:</p>
+  <form method="POST" action="<%= build_path(["articles", @article.id, "categories"]) %>">
+    <%= new_input("category") %>
+    <input type="submit">
+  </form>
+
+</div>
+
 <div class="article-data">
   <p>Created: <%= @article.created_at %></p>
   <p>Created by: <%=  @article.created_by %></p>
