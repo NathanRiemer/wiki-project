@@ -2,6 +2,10 @@ module Sinatra
 
   module LinkUtils
 
+    def current_user 
+      User.find(session[:user_id])
+    end
+
     def build_path(pathArray)
       "/" + pathArray.join("/")
     end

@@ -1,8 +1,16 @@
 <h1><%= @article.title %></h1>
+<%= build_link(["articles", @article.id, "edit"], "Edit article") %>
 
-<p>Last modified: <%= @article.current_rev.created_at %></p>
-<p>Last modified by: <%= @article.last_modified_by %></p>
+<div class="article-content">
+  <p><%= @article.current_content %></p>
+</div>
 
-<p><%= @article.current_content %></p>
+<div class="article-data">
+  <p>Created: <%= @article.created_at %></p>
+  <p>Created by: <%=  @article.created_by %></p>
+
+  <p>Last modified: <%= @article.last_modified_at %></p>
+  <p>Last modified by: <%= @article.last_modified_by %></p>
+</div>
 
 <%= build_link(["articles", @article.id, "revisions"], "Revisions") %>

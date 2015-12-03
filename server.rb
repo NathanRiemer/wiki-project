@@ -87,6 +87,20 @@ module App
       erb :article
     end
 
+    get "/articles/:id/edit" do 
+      redirect to "/articles" if !session[:user_id]
+      @article = Article.find(params[:id])
+      erb :edit_article
+    end
+
+    post "/articles/:id/revisions" do 
+      redirect to "/articles" if !session[:user_id]
+      user = current_user
+      article = Article.find(params[:id])
+      revision = Revision.create(content: params[:content], created_at: DateTime.now, user_id: user.id, article_id: article.id)
+      redirect to build_path(["articles", article.id])
+    end
+
     get "/articles/:id/revisions" do 
       @article = Article.find(params[:id])
       erb :revisions

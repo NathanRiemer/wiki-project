@@ -1,0 +1,6 @@
+<h1>Edit Article: <%= @article.title %></h1>
+
+<form method="POST" action="<%= build_path(["articles", @article.id, "revisions"]) %>">
+  <input type="text" name="content" class="textbox" value="<%= @article.current_content %>">
+  <input type="submit">
+</form>

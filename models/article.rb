@@ -6,6 +6,10 @@ class Article < ActiveRecord::Base
     revisions.last
   end
 
+  def last_modified_at
+    current_rev.created_at
+  end
+
   def last_modified_by
     current_rev.user.username
   end
@@ -23,7 +27,7 @@ class Article < ActiveRecord::Base
   end
 
   def created_by
-    revisions.first.user
+    revisions.first.user.username
   end
 
   def created_at
