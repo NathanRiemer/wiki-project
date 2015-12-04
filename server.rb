@@ -3,6 +3,7 @@ module App
     set :method_override, true
     enable :sessions
     helpers Sinatra::LinkUtils
+    $markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {})
 
     get "/" do
       @user = current_user

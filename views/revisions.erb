@@ -6,6 +6,6 @@
   <p>Modified: <%= revision.created_at %></p>
   <p>Modified by: <%= revision.user.username %></p>
 
-  <p><%= revision.content %></p>
+  <%= $markdown.render(revision.content) %>
 
 <% end %>

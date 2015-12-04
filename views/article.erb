@@ -2,7 +2,7 @@
 <%= build_link(["articles", @article.id, "edit"], "Edit article") %>
 
 <div class="article-content">
-  <p><%= @article.current_content %></p>
+  <%= $markdown.render(@article.current_content) %>
 </div>
 
 <div class="article-categories">
