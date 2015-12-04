@@ -8,7 +8,7 @@ Comment.destroy_all
 Category.destroy_all
 
 users = [
-  {username: "nathanriemer", password: "password", email: "nathan.riemer@gmail.com"},
+  {username: "nathanriemer", password: "password", email: "nathan.riemer@gmail.com", is_admin: true, city: "New York", state: "NY", country: "USA"},
   {username: "someoneelse", password: "password", email: "fake@gmail.com"}
 ]
 
@@ -39,5 +39,5 @@ Comment.create(comments)
 fitness = Category.create(title: "fitness")
 animals = Category.create(title: "animals")
 
-Article.find(1).categories.push(fitness)
-Article.find(2).categories.push(animals)
+Article.find(1).categories.push(animals)
+Article.find(2).categories.push(fitness)
