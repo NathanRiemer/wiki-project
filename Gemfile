@@ -6,6 +6,7 @@ gem "sinatra"
 gem "activerecord"
 gem "bcrypt"
 gem "pry"
+gem "redcarpet"
 group :development do
   gem "sqlite3"
 end
