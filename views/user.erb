@@ -1,5 +1,15 @@
 <h1><%= @this_user.username %></h1>
 
+<% if @this_user.admin? %>
+  <p>Admin User</p>
+<% elsif @user.admin? %>
+  <form method="post" action="<%= build_path(["users", @this_user.id]) %>">
+    <input type="hidden" name="_method" value="patch">
+    <input type="hidden" name="is_admin" value="true">
+    <input type="submit" value="Make admin">
+  </form>
+<% end %>
+
 <img src="<%= @this_user.avatar_image_url %>">
 
 <p>Email: <%= @this_user.email %></p>

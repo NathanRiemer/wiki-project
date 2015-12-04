@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
     comments.count
   end
 
+  def admin?
+    is_admin
+  end
+
 end

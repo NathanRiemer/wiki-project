@@ -57,9 +57,13 @@ module App
       erb :edit_profile
     end
 
-    patch "/users/:id" do 
+    patch "/users/:id" do
       @user = User.find(params[:id])
-      edit_user(@user)
+      if params[:is_admin] == "true"
+        @user.update(is_admin: true)
+      else
+        edit_user(@user)
+      end
       redirect to build_path(["users", @user.id])
     end
 
@@ -152,7 +156,8 @@ module App
       erb :categories
     end
 
-    get "/categories/new" do            redirect to "/categories" if !session[:user_id]
+    get "/categories/new" do            
+      redirect to "/categories" if !session[:user_id]
       @user = current_user
       erb :new_category
     end

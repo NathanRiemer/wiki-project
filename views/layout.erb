@@ -8,7 +8,11 @@
     <div class="topbar">
       <ul>
         <% if @user %>
-          <li>Logged in as <%= @user.username %></li>
+          <% if @user.admin? %>
+            <li>Logged in as admin: <%= @user.username %></li>
+          <% else %>
+            <li>Logged in as <%= @user.username %></li>
+          <% end %>
           <li><%= build_link(["users", @user.id], "Profile") %></li>
           <li>
             <form method="POST" action="/sessions">

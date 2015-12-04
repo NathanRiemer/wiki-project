@@ -1,4 +1,7 @@
 <h1><%= @user.username %></h1>
+<% if @user.admin? %>
+  <p>Admin User</p>
+<% end %>
 
 <img src="<%= @user.avatar_image_url %>">
 
@@ -12,8 +15,10 @@
 
 <%= build_link(["users", @user.id, "edit"], "Edit Profile") %>
 
-<p>Number of articles contributed to: <%= @user.num_articles %></p>
+<div class="contribution-details">
+  <p>Number of articles contributed to: <%= @user.num_articles %></p>
 
-<p>Number of article edits: <%= @user.num_revisions %></p>
+  <p>Number of article edits: <%= @user.num_revisions %></p>
 
-<p>Number of comments: <%= @user.num_comments; %></p>
+  <p>Number of comments: <%= @user.num_comments; %></p>
+</div>
