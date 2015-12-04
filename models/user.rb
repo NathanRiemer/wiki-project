@@ -18,7 +18,4 @@ class User < ActiveRecord::Base
     comments.count
   end
 
-  def self.current_user (session)
-    self.find(session[:user_id]) if session[:user_id]
-  end
 end

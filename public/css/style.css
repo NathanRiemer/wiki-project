@@ -1,0 +1,13 @@
+div {
+  border: 1px solid black;
+}
+
+.topbar li,
+.topbar form {
+  display: inline;
+}
+
+.sidebar {
+  float: left;
+}
+

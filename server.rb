@@ -5,7 +5,7 @@ module App
     helpers Sinatra::LinkUtils
 
     get "/" do
-      @user = User.current_user(session)
+      @user = current_user
       erb :index
     end
 
@@ -34,18 +34,19 @@ module App
     end
 
     get "/users" do 
+      @user = current_user
       @users = User.all
       erb :users
     end
 
     get "/users/:id" do 
-      @user = User.find(session[:user_id])
+      @user = current_user
       if @user.nil?
         redirect to "/users"
       elsif is_authenticated_user
         erb :profile
       else
-        @user = User.find(params[:id])
+        @this_user = User.find(params[:id])
         erb :user
       end
     end
@@ -63,13 +64,14 @@ module App
     end
 
     get "/articles" do
-      @user = User.current_user(session)
+      @user = current_user
       @articles = Article.all
       erb :articles
     end
 
     get "/articles/new" do
       redirect to "/articles" if !session[:user_id]
+      @user = current_user
       @categories = Category.all
       erb :new_article
     end
@@ -83,12 +85,14 @@ module App
     end
 
     get "/articles/:id" do 
+      @user = current_user
       @article = Article.find(params[:id])
       erb :article
     end
 
     get "/articles/:id/edit" do 
       redirect to "/articles" if !session[:user_id]
+      @user = current_user
       @article = Article.find(params[:id])
       erb :edit_article
     end
@@ -102,6 +106,7 @@ module App
     end
 
     get "/articles/:id/revisions" do 
+      @user = current_user
       @article = Article.find(params[:id])
       erb :revisions
     end
@@ -129,6 +134,7 @@ module App
     end
 
     get "/articles/:id/categories/edit" do 
+      @user = current_user
       @article = Article.find(params[:id])
       erb :edit_article_categories
     end
@@ -141,12 +147,13 @@ module App
     end
 
     get "/categories" do 
-      @user = User.current_user(session)
+      @user = current_user
       @categories = Category.all.order(:title)
       erb :categories
     end
 
     get "/categories/new" do            redirect to "/categories" if !session[:user_id]
+      @user = current_user
       erb :new_category
     end
 
@@ -156,6 +163,7 @@ module App
     end
 
     get "/categories/:id" do 
+      @user = current_user
       @category = Category.find(params[:id])
       erb :category
     end
