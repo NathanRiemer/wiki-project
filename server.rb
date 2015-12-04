@@ -3,7 +3,11 @@ module App
     set :method_override, true
     enable :sessions
     helpers Sinatra::LinkUtils
-    $markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {})
+    $markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions={})
+
+    # def markdown_renderer
+    #   @markdown_renderer || @markdown_renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {})
+    # end
 
     get "/" do
       @user = current_user
@@ -82,7 +86,7 @@ module App
     end
 
     post "/articles" do 
-      user = User.current_user(session)
+      user = current_user
       article = Article.create_from_params(params)
       revision = Revision.create(content: params[:content], created_at: DateTime.now, user_id: user.id, article_id: article.id)
       # params[:categories].each {|category_id| article.add_category(category_id) }
