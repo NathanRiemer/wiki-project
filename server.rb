@@ -15,7 +15,7 @@ module App
     end
 
     get "/login" do 
-      erb :login
+      erb :'users/login'
     end
 
     post "/sessions" do 
@@ -30,7 +30,7 @@ module App
     end      
 
     get "/signup" do 
-      erb :signup
+      erb :'users/new'
     end
 
     post "/users" do 
@@ -42,7 +42,7 @@ module App
     get "/users" do 
       @user = current_user
       @users = User.all
-      erb :users
+      erb :'users/index'
     end
 
     get "/users/:id" do 
@@ -50,17 +50,17 @@ module App
       if @user.nil?
         redirect to "/users"
       elsif is_authenticated_user
-        erb :profile
+        erb :'users/profile'
       else
         @this_user = User.find(params[:id])
-        erb :user
+        erb :'users/show'
       end
     end
 
     get "/users/:id/edit" do 
       redirect to "/users" if !is_authenticated_user
       @user = User.find(params[:id])
-      erb :edit_profile
+      erb :'users/edit_profile'
     end
 
     patch "/users/:id" do
@@ -76,14 +76,14 @@ module App
     get "/articles" do
       @user = current_user
       @articles = Article.all
-      erb :articles
+      erb :'articles/index'
     end
 
     get "/articles/new" do
       redirect to "/articles" if !session[:user_id]
       @user = current_user
       @categories = Category.all
-      erb :new_article
+      erb :'articles/new'
     end
 
     post "/articles" do 
@@ -97,14 +97,14 @@ module App
     get "/articles/:id" do 
       @user = current_user
       @article = Article.find(params[:id])
-      erb :article
+      erb :'articles/show'
     end
 
     get "/articles/:id/edit" do 
       redirect to "/articles" if !session[:user_id]
       @user = current_user
       @article = Article.find(params[:id])
-      erb :edit_article
+      erb :'articles/edit'
     end
 
     post "/articles/:id/revisions" do 
@@ -118,13 +118,13 @@ module App
     get "/articles/:id/revisions" do 
       @user = current_user
       @article = Article.find(params[:id])
-      erb :revisions
+      erb :'revisions/index'
     end
 
     get "/articles/:id/revisions/:rev_id" do 
       @user = current_user
       @revision = Revision.find(params[:rev_id])
-      erb :revision
+      erb :'revisions/show'
     end
 
     post "/articles/:id/revisions/:rev_id/comments" do 
@@ -146,7 +146,7 @@ module App
     get "/articles/:id/categories/edit" do 
       @user = current_user
       @article = Article.find(params[:id])
-      erb :edit_article_categories
+      erb :'articles/edit_article_categories'
     end
 
     delete "/articles/:id/categories/:cat_id" do 
@@ -159,13 +159,13 @@ module App
     get "/categories" do 
       @user = current_user
       @categories = Category.all.order(:title)
-      erb :categories
+      erb :'categories/index'
     end
 
     get "/categories/new" do            
       redirect to "/categories" if !session[:user_id]
       @user = current_user
-      erb :new_category
+      erb :'categories/new'
     end
 
     post "/categories" do 
@@ -176,7 +176,7 @@ module App
     get "/categories/:id" do 
       @user = current_user
       @category = Category.find(params[:id])
-      erb :category
+      erb :'categories/show'
     end
 
   end # Server
