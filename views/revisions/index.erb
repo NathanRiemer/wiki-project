@@ -9,12 +9,7 @@
   <h1>Revisions for <%= @article.title %></h1>
 
   <% @article.revisions.each_with_index do |revision, index| %>
-
-    <p><a href="<%= "/articles/#{@article.id}/revisions/#{revision.id} " %>">Version <%= index + 1%></a></p>
-    <p>Modified: <%= revision.created_at %></p>
-    <p>Modified by: <%= revision.user.username %></p>
-
-    <%= $markdown.render(revision.content) %>
+    <p><%= build_link(["articles", @article.id, "revisions", revision.id], revision.mod_history("Modified")) %></p>
 
   <% end %>
 

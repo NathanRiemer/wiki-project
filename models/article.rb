@@ -38,4 +38,12 @@ class Article < ActiveRecord::Base
     revisions.first.created_at
   end
 
+  def creation_history
+    revisions.first.mod_history("Created")
+  end
+
+  def current_history
+    current_rev.mod_history("Last modified")
+  end
+
 end

@@ -43,6 +43,16 @@ module Sinatra
       user_instance.save
     end
 
+    def add_categories_to_article
+      titles = params[:categories].split(",")
+      titles.each do |title|
+        title.strip!
+        category = Category.find_by(title: title)
+        category = Category.create(title: title) if !category
+        @article.categories.push(category) unless @article.categories.include?(category)
+      end
+    end
+
   end
 
 end

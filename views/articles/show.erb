@@ -30,11 +30,8 @@
   </div>
 
   <div class="article data">
-    <p>Created: <%= @article.created_at %></p>
-    <p>Created by: <%=  @article.created_by %></p>
-
-    <p>Last modified: <%= @article.last_modified_at %></p>
-    <p>Last modified by: <%= @article.last_modified_by %></p>
+    <p><%= @article.creation_history %></p>
+    <p><%= @article.current_history %></p>
   </div>
 
 </div>

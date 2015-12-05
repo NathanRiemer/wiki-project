@@ -12,6 +12,6 @@
 
 <p>Add categories to this article:</p>
 <form method="POST" action="<%= build_path(["articles", @article.id, "categories"]) %>">
-  <%= new_input("category") %>
+  <%= new_input("categories") %>
   <input type="submit">
 </form>

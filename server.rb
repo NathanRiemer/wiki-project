@@ -95,10 +95,10 @@ module App
 
     post "/articles" do 
       user = current_user
-      article = Article.create_from_params(params)
-      revision = Revision.create(content: params[:content], created_at: DateTime.now, user_id: user.id, article_id: article.id, primary_image_url: params[:primary_image_url])
-      # params[:categories].each {|category_id| article.add_category(category_id) }
-      redirect to "/articles/#{article.id}"
+      @article = Article.create_from_params(params)
+      revision = Revision.create(content: params[:content], created_at: DateTime.now, user_id: user.id, article_id: @article.id, primary_image_url: params[:primary_image_url])
+      add_categories_to_article if params[:categories]
+      redirect to "/articles/#{@article.id}"
     end
 
     get "/articles/:id" do 
@@ -145,6 +145,7 @@ module App
 
     get "/articles/:id/revisions/:rev_id" do 
       @user = current_user
+      @article = Article.find(params[:id])
       @revision = Revision.find(params[:rev_id])
       erb :'revisions/show'
     end
@@ -157,14 +158,8 @@ module App
     end
 
     post "/articles/:id/categories" do 
-      article = Article.find(params[:id])
-      titles = params[:category].split(",")
-      titles.each do |title|
-        title.strip!
-        category = Category.find_by(title: title)
-        category = Category.create(title: title) if !category
-        article.categories.push(category) unless article.categories.include?(category)
-      end
+      @article = Article.find(params[:id])
+      add_categories_to_article
       redirect to build_path(["articles", params[:id]])
     end
 

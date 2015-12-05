@@ -1,28 +1,35 @@
+<div class="article">
+  <div class="bar">
+    <ul>
+      <li><%= build_link(["articles", @article.id], "Read") %></li>
+      <li><%= build_link(["articles", @article.id, "edit"], "Edit") %></li>
+      <li class="active"><%= build_link(["articles", @article.id, "revisions"], "Revisions") %></li>
+    </ul>
+  </div>
+  <div class="revision">
+    <p><%= @revision.mod_history("Modified") %></p>
 
-<div class="revision">
-  <p>Modified: <%= @revision.created_at %></p>
-  <p>Modified by: <%= @revision.user.username %></p>
-
-  <%= $markdown.render(@revision.content) %>
-</div>
-
-<h4>Comments: </h4>
-<% @revision.comments.each_with_index do |comment, index| %>
-  <div class="comment">
-    <p>Comment <%= index + 1 %></p>
-    <p>Posted: <%= comment.created_at %></p>
-    <p>Posted by: <%= comment.user.username %></p>
-
-    <%= $markdown.render(comment.content) %>
+    <%= $markdown.render(@revision.content) %>
   </div>
 
-<% end %>
+  <h4>Comments: </h4>
+  <% @revision.comments.each_with_index do |comment, index| %>
+    <div class="comment">
+      <p>Comment <%= index + 1 %></p>
+      <p>Posted: <%= comment.created_at %></p>
+      <p>Posted by: <%= comment.user.username %></p>
 
-<% if @user %>
-  <h5>Add comment:</h5>
-  <form method="POST" action="<%= build_path(["articles", @revision.article_id, "revisions", @revision.id, "comments"]) %>">
-    <input type="text" name="content">
-    <input type="submit" value="Submit comment">
-  </form>
+      <%= $markdown.render(comment.content) %>
+    </div>
 
-<% end %>
+  <% end %>
+
+  <% if @user %>
+    <h5>Add comment:</h5>
+    <form method="POST" action="<%= build_path(["articles", @revision.article_id, "revisions", @revision.id, "comments"]) %>">
+      <input type="text" name="content">
+      <input type="submit" value="Submit comment">
+    </form>
+
+  <% end %>
+</div>
