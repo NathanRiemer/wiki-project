@@ -18,6 +18,10 @@ class Article < ActiveRecord::Base
     current_rev.content
   end
 
+  def current_image
+    current_rev.primary_image_url
+  end
+
   def self.create_from_params (params)
     self.create(title: params[:title])
   end

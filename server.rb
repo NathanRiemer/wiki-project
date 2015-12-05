@@ -11,7 +11,13 @@ module App
 
     get "/" do
       @user = current_user
+      @intro = Article.find_by(title: "Welcome")
       erb :index
+    end
+
+    get "/search" do 
+      @user = current_user
+      erb :search
     end
 
     get "/login" do 

@@ -1,20 +1,9 @@
 <h1>Welcome to the wiki</h1>
-<!--
-<% if @user %>
-  <p><%= build_link(["users", @user.id], "Profile") %></p>
-  <form method="POST" action="/sessions">
-    <input type="hidden" name="_method" value="delete">
-    <input type="submit" value="Log out">
-  </form>
-
-<% else %>
-  <p><a href="/login">Log In</a></p>
-  <p><a href="/signup">Create new user</a></p>
-<% end %>
 
 
-<p><a href="/articles">Articles</a></p>
-<p><a href="/users">Users</a></p>
-<p><a href="/categories">Categories</a></p>
-
--->
+<div class="intro article">
+  <div class="article content">
+    <%= $markdown.render(@intro.current_content) %>
+  </div>
+  <img src="<%= @intro.current_image %>">
+</div>

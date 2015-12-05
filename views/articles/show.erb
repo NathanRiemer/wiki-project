@@ -1,11 +1,11 @@
 <h1><%= @article.title %></h1>
 <%= build_link(["articles", @article.id, "edit"], "Edit article") %>
 
-<div class="article-content">
+<div class="article content">
   <%= $markdown.render(@article.current_content) %>
 </div>
 
-<div class="article-categories">
+<div class="article categories">
   <h5>Categories:</h5>
   <ul>
     <% @article.categories.each do |category| %>
@@ -17,7 +17,7 @@
 
 </div>
 
-<div class="article-data">
+<div class="article data">
   <p>Created: <%= @article.created_at %></p>
   <p>Created by: <%=  @article.created_by %></p>
 

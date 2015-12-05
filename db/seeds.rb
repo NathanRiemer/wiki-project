@@ -16,22 +16,24 @@ User.create(users)
 
 articles = [
   {title: "Dogs"},
-  {title: "Running"}
+  {title: "Running"},
+  {title: "Welcome"}
 ]
 
 Article.create(articles)
 
 revisions = [
   {content: "Dogs are really great", created_at: DateTime.now, user_id: 1, article_id: 1},
-  {content: "Dogs are extremely great", created_at: DateTime.now, user_id: 1, article_id: 1},
-  {content: "Yay Running", created_at: DateTime.now, user_id: 1, article_id: 2}
+  {content: "Dogs are *extremely* great", created_at: DateTime.now, user_id: 1, article_id: 1},
+  {content: "Yay Running", created_at: DateTime.now, user_id: 1, article_id: 2},
+  {content: "Welcome to Nathan Riemer's wiki project", created_at: DateTime.now, user_id: 1, article_id: 3, primary_image_url: "https://upload.wikimedia.org/wikipedia/commons/5/55/Wikipedia_logo_gold.png"}
 ]
 
 Revision.create(revisions)
 
 comments = [
   {content: "ya i love dogs", created_at: DateTime.now, user_id: 2, revision_id: 2},
-  {content: "running hurts my feet", created_at: DateTime.now, user_id: 2, revision_id: 3}
+  {content: "running __hurts__ my feet", created_at: DateTime.now, user_id: 2, revision_id: 3}
 ]
 
 Comment.create(comments)

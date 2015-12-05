@@ -56,4 +56,4 @@ class CreateSchema < ActiveRecord::Migration
 
 end # CreateSchema
 
-CreateSchema.migrate(ARGV[0])
+CreateSchema.migrate(ARGV[0]) if ARGV[0]

@@ -2,15 +2,41 @@ div {
   border: 1px solid black;
 }
 
-.topbar li,
-.topbar form {
+.top.bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.bar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.top.bar li,
+.top.bar form {
   display: inline;
 }
 
-.sidebar {
-  float: left;
+.side.bar {
+  position: fixed;
+  top: 30px;
+  height: 100%;
+}
+
+.side.bar li {
+  display: block;
 }
 
 .page-content {
-  float: left;
+  position: relative;
+  top: 70px;
+  left: 120px;
+  min-height: 300px;
+}
+
+.article img {
+  display: inline;
+  width: 30%;
 }
