@@ -9,10 +9,16 @@
   <div class="revision">
     <p><%= @revision.mod_history("Modified") %></p>
 
-    <%= $markdown.render(@revision.content) %>
+    <div class="toc"><%= $toc_markdown.render(@revision.content) %></div>
+    <img src="<%= @revision.primary_image_url %>">
+
+    <div class="article content">
+      <%= $markdown.render(@article.current_content) %>
+    </div>
   </div>
 
   <h4>Comments: </h4>
+  <button class="comment toggler">Hide Comments</button>
   <div class="comments">
     <% @revision.comments.each_with_index do |comment, index| %>
       <div class="comment">
