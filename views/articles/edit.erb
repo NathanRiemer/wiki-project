@@ -10,11 +10,25 @@
 
   <h1>Edit Article: <%= @article.title %></h1>
 
+  <% if @user.is_admin? %>
+    <form method="POST" action="<%= build_path(["articles", @article.id]) %>">
+      <input type="hidden" name="_method" value="patch">
+      <label>Title: <%= edit_input(@article, "title") %></label>
+      <input type="submit" value="Update title">
+    </form>
+  <% end %>
+
   <form method="POST" action="<%= build_path(["articles", @article.id, "revisions"]) %>">
     <label>Primary image url: <input type="text" name="primary_image_url" value="<%= @article.current_image %>"></label>
     <br>
     <textarea rows="4" cols="50" name="content"><%= @article.current_content %></textarea>
-
     <input type="submit">
   </form>
+
+<% if @user.is_admin? %>
+  <form method="POST" action="<%= build_path(["articles", @article.id]) %>">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete this article">
+  </form>
+<% end %>
 </div>

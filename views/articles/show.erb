@@ -10,7 +10,7 @@
 
 
   <h1><%= @article.title %></h1>
-  
+  <div class="toc"><%= $toc_markdown.render(@article.current_content) %></div>
   <img src="<%= @article.current_image %>">
 
   <div class="article content">
@@ -18,14 +18,14 @@
   </div>
 
   <div class="article categories">
-    <h5>Categories:</h5>
+    <h3>Categories:<%= build_link(["articles", @article.id, "categories", "edit"], "Edit categories") %></h3>
+
     <ul>
       <% @article.categories.each do |category| %>
         <li><%= build_link(["categories", category.id], category.title) %></li>
       <% end %>
     </ul>
 
-    <%= build_link(["articles", @article.id, "categories", "edit"], "Edit categories") %>
 
   </div>
 
@@ -37,5 +37,4 @@
     <p>Last modified by: <%= @article.last_modified_by %></p>
   </div>
 
-  <%= build_link(["articles", @article.id, "revisions"], "Revisions") %>
 </div>

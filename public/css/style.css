@@ -2,6 +2,10 @@ div {
   border: 1px solid black;
 }
 
+.page-content {
+  background-color: blanchedalmond;
+}
+
 .top.bar {
   position: fixed;
   top: 0;
@@ -44,4 +48,8 @@ div {
 
 .active {
   background-color: green;
+}
+
+.article h3 a {
+  font-size: 10px;
 }

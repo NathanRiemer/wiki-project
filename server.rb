@@ -3,7 +3,8 @@ module App
     set :method_override, true
     enable :sessions
     helpers Sinatra::LinkUtils
-    $markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions={})
+    $markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(with_toc_data: true), autolink: true)
+    $toc_markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML_TOC, extensions={})
 
     # def markdown_renderer
     #   @markdown_renderer || @markdown_renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {})
@@ -111,6 +112,21 @@ module App
       @user = current_user
       @article = Article.find(params[:id])
       erb :'articles/edit'
+    end
+
+    patch "/articles/:id" do 
+      redirect to "/articles" if !session[:user_id]
+      user = current_user
+      article = Article.find(params[:id])
+      article.update(title: params[:title])
+      redirect to build_path(["articles", article.id])
+    end
+
+    delete "/articles/:id" do 
+      redirect to "/articles" if !session[:user_id]
+      article = Article.find(params[:id])
+      article.destroy
+      redirect to "/articles"
     end
 
     post "/articles/:id/revisions" do 
