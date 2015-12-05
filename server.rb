@@ -158,10 +158,13 @@ module App
 
     post "/articles/:id/categories" do 
       article = Article.find(params[:id])
-      title = params[:category]
-      category = Category.find_by(title: title)
-      category = Category.create(title: title) if !category
-      article.categories.push(category) unless article.categories.include?(category)
+      titles = params[:category].split(",")
+      titles.each do |title|
+        title.strip!
+        category = Category.find_by(title: title)
+        category = Category.create(title: title) if !category
+        article.categories.push(category) unless article.categories.include?(category)
+      end
       redirect to build_path(["articles", params[:id]])
     end
 
