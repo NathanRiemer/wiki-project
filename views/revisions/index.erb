@@ -1,11 +1,21 @@
-<h1>Revisions for <%= @article.title %></h1>
+<div class="article">
+  <div class="bar">
+    <ul>
+      <li><%= build_link(["articles", @article.id], "Read") %></li>
+      <li><%= build_link(["articles", @article.id, "edit"], "Edit") %></li>
+      <li class="active"><%= build_link(["articles", @article.id, "revisions"], "Revisions") %></li>
+    </ul>
+  </div>
+  <h1>Revisions for <%= @article.title %></h1>
 
-<% @article.revisions.each_with_index do |revision, index| %>
+  <% @article.revisions.each_with_index do |revision, index| %>
 
-  <p><a href="<%= "/articles/#{@article.id}/revisions/#{revision.id} " %>">Version <%= index + 1%></a></p>
-  <p>Modified: <%= revision.created_at %></p>
-  <p>Modified by: <%= revision.user.username %></p>
+    <p><a href="<%= "/articles/#{@article.id}/revisions/#{revision.id} " %>">Version <%= index + 1%></a></p>
+    <p>Modified: <%= revision.created_at %></p>
+    <p>Modified by: <%= revision.user.username %></p>
 
-  <%= $markdown.render(revision.content) %>
+    <%= $markdown.render(revision.content) %>
 
-<% end %>
+  <% end %>
+
+</div>

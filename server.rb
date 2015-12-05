@@ -81,7 +81,7 @@ module App
 
     get "/articles" do
       @user = current_user
-      @articles = Article.all
+      @articles = Article.all.order(:title)
       erb :'articles/index'
     end
 
@@ -95,7 +95,7 @@ module App
     post "/articles" do 
       user = current_user
       article = Article.create_from_params(params)
-      revision = Revision.create(content: params[:content], created_at: DateTime.now, user_id: user.id, article_id: article.id)
+      revision = Revision.create(content: params[:content], created_at: DateTime.now, user_id: user.id, article_id: article.id, primary_image_url: params[:primary_image_url])
       # params[:categories].each {|category_id| article.add_category(category_id) }
       redirect to "/articles/#{article.id}"
     end
@@ -117,7 +117,7 @@ module App
       redirect to "/articles" if !session[:user_id]
       user = current_user
       article = Article.find(params[:id])
-      revision = Revision.create(content: params[:content], created_at: DateTime.now, user_id: user.id, article_id: article.id)
+      revision = Revision.create(content: params[:content], created_at: DateTime.now, user_id: user.id, article_id: article.id, primary_image_url: params[:primary_image_url])
       redirect to build_path(["articles", article.id])
     end
 

@@ -1,7 +1,20 @@
-<h1>Edit Article: <%= @article.title %></h1>
+<div class="article">
 
-<form method="POST" action="<%= build_path(["articles", @article.id, "revisions"]) %>">
-  <textarea rows="4" cols="50" name="content"><%= @article.current_content %></textarea>
+  <div class="bar">
+    <ul>
+      <li><%= build_link(["articles", @article.id], "Read") %></li>
+      <li class="active"><%= build_link(["articles", @article.id, "edit"], "Edit") %></li>
+      <li><%= build_link(["articles", @article.id, "revisions"], "Revisions") %></li>
+    </ul>
+  </div>
 
-  <input type="submit">
-</form>
+  <h1>Edit Article: <%= @article.title %></h1>
+
+  <form method="POST" action="<%= build_path(["articles", @article.id, "revisions"]) %>">
+    <label>Primary image url: <input type="text" name="primary_image_url" value="<%= @article.current_image %>"></label>
+    <br>
+    <textarea rows="4" cols="50" name="content"><%= @article.current_content %></textarea>
+
+    <input type="submit">
+  </form>
+</div>

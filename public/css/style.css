@@ -15,7 +15,8 @@ div {
 }
 
 .top.bar li,
-.top.bar form {
+.top.bar form,
+.article .bar li {
   display: inline;
 }
 
@@ -37,6 +38,10 @@ div {
 }
 
 .article img {
-  display: inline;
+  display: inline-block;
   width: 30%;
+}
+
+.active {
+  background-color: green;
 }
