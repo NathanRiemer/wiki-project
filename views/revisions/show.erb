@@ -26,7 +26,7 @@
         <p><%= comment.history %></p>
 
         <%= $markdown.render(comment.content) %>
-        <% if @user.is_admin? || @user == comment.user %>
+        <% if @admin || @user == comment.user %>
           <form method="POST" action="<%= build_path(["articles", @article.id, "revisions", @revision.id, "comments", comment.id])%>">
             <input type="hidden" name="_method" value="delete">
             <input type="submit" value="Delete comment">

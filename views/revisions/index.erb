@@ -9,7 +9,11 @@
   <h1>Revisions for <%= @article.title %></h1>
 
   <% @article.revisions.each_with_index do |revision, index| %>
-    <p><%= build_link(["articles", @article.id, "revisions", revision.id], revision.mod_history("Modified")) %></p>
+    <% if index == 0 %>
+      <p><%= build_link(["articles", @article.id, "revisions", revision.id], revision.mod_history("Created")) %></p>
+    <% else %>
+      <p><%= build_link(["articles", @article.id, "revisions", revision.id], revision.mod_history("Modified")) %></p>
+    <% end %>
 
   <% end %>
 

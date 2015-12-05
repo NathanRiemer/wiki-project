@@ -145,6 +145,7 @@ module App
 
     get "/articles/:id/revisions/:rev_id" do 
       @user = current_user
+      @admin = @user.is_admin? if @user
       @article = Article.find(params[:id])
       @revision = Revision.find(params[:rev_id])
       erb :'revisions/show'
