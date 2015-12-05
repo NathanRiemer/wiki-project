@@ -157,6 +157,12 @@ module App
       redirect to build_path(["articles", params[:id], "revisions", params[:rev_id]])
     end
 
+    delete "/articles/:id/revisions/:rev_id/comments/:comment_id" do 
+      comment = Comment.find(params[:comment_id])
+      comment.delete
+      redirect to build_path(["articles", params[:id], "revisions", params[:rev_id]])
+    end
+
     post "/articles/:id/categories" do 
       @article = Article.find(params[:id])
       add_categories_to_article

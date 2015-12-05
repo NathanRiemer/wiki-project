@@ -13,23 +13,29 @@
   </div>
 
   <h4>Comments: </h4>
-  <% @revision.comments.each_with_index do |comment, index| %>
-    <div class="comment">
-      <p>Comment <%= index + 1 %></p>
-      <p>Posted: <%= comment.created_at %></p>
-      <p>Posted by: <%= comment.user.username %></p>
+  <div class="comments">
+    <% @revision.comments.each_with_index do |comment, index| %>
+      <div class="comment">
+        <p>Comment <%= index + 1 %></p>
+        <p><%= comment.history %></p>
 
-      <%= $markdown.render(comment.content) %>
-    </div>
+        <%= $markdown.render(comment.content) %>
+        <% if @user.is_admin? || @user == comment.user %>
+          <form method="POST" action="<%= build_path(["articles", @article.id, "revisions", @revision.id, "comments", comment.id])%>">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="Delete comment">
+          </form>
+        <% end %>
+      </div>
+    <% end %>
 
-  <% end %>
+    <% if @user %>
+      <h5>Add comment:</h5>
+      <form method="POST" action="<%= build_path(["articles", @revision.article_id, "revisions", @revision.id, "comments"]) %>">
+        <input type="text" name="content">
+        <input type="submit" value="Submit comment">
+      </form>
 
-  <% if @user %>
-    <h5>Add comment:</h5>
-    <form method="POST" action="<%= build_path(["articles", @revision.article_id, "revisions", @revision.id, "comments"]) %>">
-      <input type="text" name="content">
-      <input type="submit" value="Submit comment">
-    </form>
-
-  <% end %>
+    <% end %>
+  </div> <!-- comments -->
 </div>
