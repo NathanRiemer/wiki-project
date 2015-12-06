@@ -1,4 +1,7 @@
 <h1><%= @category.title %></h1>
+<% if @user %>
+  <%= build_link(["categories", @category.id, "edit"], "Edit") %>
+<% end %>
 
 <ul>
   <% @category.articles.each do |article| %>

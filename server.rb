@@ -214,5 +214,31 @@ module App
       erb :'categories/show'
     end
 
+    get "/categories/:id/edit" do 
+      redirect to build_path(["categories", params[:id]]) if !session[:user_id]
+      @user = current_user
+      @category = Category.find(params[:id])
+      erb :'categories/edit'
+    end
+
+    patch "/categories/:id" do 
+      category = Category.find(params[:id])
+      category.update(title: params[:title])
+      redirect to build_path(["categories", params[:id]])
+    end
+
+    delete "/categories/:id" do 
+      category = Category.find(params[:id])
+      category.delete
+      redirect to "/categories"
+    end
+
+    delete "/categories/:id/articles/:art_id" do 
+      article = Article.find(params[:art_id])
+      category = Category.find(params[:id])
+      category.articles.delete(article)
+      redirect to build_path(["categories", category.id])
+    end
+
   end # Server
 end # App
