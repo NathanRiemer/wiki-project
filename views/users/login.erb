@@ -1,4 +1,8 @@
 <h1>Log In</h1>
+<% if @message %>
+<p class="failure"><%= @message %></p>
+
+<% end %>
 
 <form method="POST" action="/sessions">
   <input type="text" name="username" placeholder="Username">
