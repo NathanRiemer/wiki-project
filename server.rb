@@ -13,6 +13,7 @@ module App
     get "/" do
       @user = current_user
       @intro = Article.find_by(title: "Welcome")
+      @popular_categories = Category.popular
       erb :index
     end
 
@@ -93,8 +94,9 @@ module App
     end
 
     get "/users/:id/articles" do 
-      @user = User.find(params[:id])
-      @articles = @user.articles.uniq
+      @user = current_user
+      @this_user = User.find(params[:id])
+      @articles = @this_user.articles.uniq
       erb :'articles/index'
     end
 

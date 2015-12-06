@@ -7,3 +7,12 @@
   </div>
   <img src="<%= @intro.current_image %>">
 </div>
+
+<div>
+  <h4>Popular Categories:</h4>
+  <ul>
+    <% @popular_categories.each do |category| %>
+      <li><a href="<%= category.path %>"><%= category.title %></a></li>
+    <% end %>
+  </ul>
+</div>

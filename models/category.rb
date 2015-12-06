@@ -5,4 +5,8 @@ class Category < ActiveRecord::Base
   def path
     "/categories/#{id}"
   end
+
+  def self.popular
+    self.all.select {|category| category.articles.length > 2}
+  end
 end
