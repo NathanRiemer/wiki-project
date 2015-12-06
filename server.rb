@@ -18,6 +18,15 @@ module App
 
     get "/search" do 
       @user = current_user
+      if params[:q]
+        if params[:in] == "articles"
+          @results = Article.where(title: params[:q])
+        elsif params[:in] == "categories"
+          @results = Category.where(title: params[:q])
+        elsif params[:in] == "content"
+          @results = Article.where_content_include?(params[:q])
+        end
+      end
       erb :search
     end
 

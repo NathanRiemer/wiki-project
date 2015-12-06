@@ -62,6 +62,10 @@ class Article < ActiveRecord::Base
     </div>"
   end
 
+  def self.where_content_include?(query_string)
+    self.all.select {|article| article.current_content.include? query_string}
+  end
+
 
 
 end

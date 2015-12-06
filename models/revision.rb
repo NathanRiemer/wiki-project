@@ -3,6 +3,10 @@ class Revision < ActiveRecord::Base
   belongs_to :article
   has_many :comments, dependent: :destroy
 
+  def path
+    "/articles/#{article_id}/revisions/#{id}"
+  end
+
   def mod_history (word)
     "#{word} by <a href='/users/#{user.id}'>#{user.username}</a> on #{created_at.strftime("%A, %B %d, %Y at %l:%M %p")}"
   end
