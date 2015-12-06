@@ -6,6 +6,10 @@ module Sinatra
       User.find(session[:user_id]) if session[:user_id]
     end
 
+    def current_admin?
+      current_user.admin? if current_user
+    end
+
     def build_path(pathArray)
       "/" + pathArray.join("/")
     end

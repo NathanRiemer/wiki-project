@@ -13,7 +13,7 @@
     <img src="<%= @revision.primary_image_url %>">
 
     <div class="article content">
-      <%= $markdown.render(@article.current_content) %>
+      <%= $markdown.render(@revision.content) %>
     </div>
   </div>
 
@@ -26,7 +26,7 @@
         <p><%= comment.history %></p>
 
         <%= $markdown.render(comment.content) %>
-        <% if @admin || @user == comment.user %>
+        <% if current_admin? || @user == comment.user %>
           <form method="POST" action="<%= build_path(["articles", @article.id, "revisions", @revision.id, "comments", comment.id])%>">
             <input type="hidden" name="_method" value="delete">
             <input type="submit" value="Delete comment">

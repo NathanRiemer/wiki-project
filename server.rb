@@ -133,7 +133,13 @@ module App
       redirect to "/articles" if !session[:user_id]
       user = current_user
       article = Article.find(params[:id])
-      revision = Revision.create(content: params[:content], created_at: DateTime.now, user_id: user.id, article_id: article.id, primary_image_url: params[:primary_image_url])
+      if params[:revision_id]
+        revision = Revision.find(params[:revision_id]).dup
+        revision.created_at = DateTime.now
+        revision.save
+      else
+        revision = Revision.create(content: params[:content], created_at: DateTime.now, user_id: user.id, article_id: article.id, primary_image_url: params[:primary_image_url])
+      end 
       redirect to build_path(["articles", article.id])
     end
 
@@ -145,7 +151,6 @@ module App
 
     get "/articles/:id/revisions/:rev_id" do 
       @user = current_user
-      @admin = @user.is_admin? if @user
       @article = Article.find(params[:id])
       @revision = Revision.find(params[:rev_id])
       erb :'revisions/show'
