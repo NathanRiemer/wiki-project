@@ -7,6 +7,7 @@ gem "activerecord"
 gem "bcrypt"
 gem "pry"
 gem "redcarpet"
+gem "ffaker"
 group :development do
   gem "sqlite3"
 end
