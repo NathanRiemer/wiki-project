@@ -23,23 +23,16 @@ articles = [
 Article.create(articles)
 
 revisions = [
-  {content: "Dogs are really great", created_at: DateTime.now, user_id: 1, article_id: 1},
-  {content: "Dogs are *extremely* great", created_at: DateTime.now, user_id: 1, article_id: 1},
-  {content: "Yay Running", created_at: DateTime.now, user_id: 1, article_id: 2},
-  {content: "Welcome to Nathan Riemer's wiki project", created_at: DateTime.now, user_id: 1, article_id: 3, primary_image_url: "https://upload.wikimedia.org/wikipedia/commons/5/55/Wikipedia_logo_gold.png"}
+  {content: "Dogs are really great", created_at: DateTime.now, user_id: User.find_by(username: "nathanriemer").id, article_id: Article.find_by(title: "Dogs").id},
+  {content: "Dogs are *extremely* great", created_at: DateTime.now, user_id: User.find_by(username: "nathanriemer").id, article_id: Article.find_by(title: "Dogs").id},
+  {content: "Yay Running", created_at: DateTime.now, user_id: User.find_by(username: "nathanriemer").id, article_id: Article.find_by(title: "Running").id},
+  {content: "Welcome to Nathan Riemer's wiki project", created_at: DateTime.now, user_id: User.find_by(username: "nathanriemer").id, article_id: Article.find_by(title: "Welcome").id, primary_image_url: "https://upload.wikimedia.org/wikipedia/commons/5/55/Wikipedia_logo_gold.png"}
 ]
 
 Revision.create(revisions)
 
-comments = [
-  {content: "ya i love dogs", created_at: DateTime.now, user_id: 2, revision_id: 2},
-  {content: "running __hurts__ my feet", created_at: DateTime.now, user_id: 2, revision_id: 3}
-]
-
-Comment.create(comments)
-
 fitness = Category.create(title: "fitness")
 animals = Category.create(title: "animals")
 
-Article.find(1).categories.push(animals)
-Article.find(2).categories.push(fitness)
+Article.find_by(title: "Dogs").categories.push(animals)
+Article.find_by(title: "Running").categories.push(fitness)

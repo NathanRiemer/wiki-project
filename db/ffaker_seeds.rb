@@ -21,7 +21,8 @@ revisions = []
 
 articles.each do |article_hash|
   3.times do 
-    revisions.push({content: FFaker::HipsterIpsum.paragraphs, created_at: DateTime.now, user_id: User.all.sample.id, article_id: Article.find_by(title: article_hash[:title]).id})
+    content = "\##{FFaker::HipsterIpsum.word}\n #{FFaker::HipsterIpsum.paragraph}\n\##{FFaker::HipsterIpsum.word}\n #{FFaker::HipsterIpsum.paragraph}\n"
+    revisions.push({content: content, primary_image_url: FFaker::Avatar.image, created_at: DateTime.now, user_id: User.all.sample.id, article_id: Article.find_by(title: article_hash[:title]).id})
   end
 end
 
@@ -29,8 +30,10 @@ Revision.create(revisions)
 
 comments = []
 
-20.times do 
-  comments.push({content: FFaker::HipsterIpsum.paragraph, created_at: DateTime.now, user_id: User.all.sample.id, revision_id: Revision.all.sample.id})
+revisions.each do |revision_hash|
+  3.times do 
+    comments.push({content: FFaker::HipsterIpsum.paragraph, created_at: DateTime.now, user_id: User.all.sample.id, revision_id: Revision.find_by(content: revision_hash[:content]).id})
+  end
 end
 
 Comment.create(comments)

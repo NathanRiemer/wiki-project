@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :revisions
   has_many :articles, through: :revisions
+  validates :username, uniqueness: true
+  validates :email, uniqueness: true
 
   def num_articles
     articles.uniq.count
