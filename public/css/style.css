@@ -2,12 +2,8 @@ div {
   border: 1px solid black;
 }
 
-.page-content {
-  background-color: blanchedalmond;
-}
-
 .top.bar {
-  position: fixed;
+  position: relative;
   top: 0;
   width: 100%;
 }
@@ -25,20 +21,34 @@ div {
 }
 
 .side.bar {
-  position: fixed;
-  top: 30px;
+  position: relative;
+  float: left;
   height: 100%;
+  /*width: 10%;*/
+  max-width: 19%;
 }
 
-.side.bar li {
+.side.bar ul {
+  background-color: skyblue;
+}
+
+.side.bar li a{
   display: block;
+  padding: 8px;
+  text-decoration: none;
+}
+
+.side.bar li a:hover {
+  background-color: green;
+  color: white;
 }
 
 .page-content {
+  background-color: blanchedalmond;
   position: relative;
-  top: 70px;
-  left: 120px;
-  min-height: 300px;
+  float: left;
+  width: 79%;
+  /*min-height: 300px;*/
 }
 
 .article img {
