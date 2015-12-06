@@ -18,4 +18,6 @@ else
   )
 end
 
+ActiveRecord::Base.default_timezone = :local
+
 Dir.glob("models/*.rb").each { |path| require_relative "../#{path}"}
