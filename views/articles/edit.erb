@@ -13,7 +13,7 @@
   <% if @user.is_admin? %>
     <form method="POST" action="<%= build_path(["articles", @article.id]) %>">
       <input type="hidden" name="_method" value="patch">
-      <label>Title: <%= edit_input(@article, "title") %></label>
+      <%= edit_input(@article, "title") %>
       <input type="submit" value="Update title">
     </form>
   <% end %>

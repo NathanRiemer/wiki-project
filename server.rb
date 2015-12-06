@@ -54,12 +54,10 @@ module App
 
     get "/users/:id" do 
       @user = current_user
-      if @user.nil?
+      @this_user = User.find(params[:id])
+      if @user.nil? || @this_user.nil?
         redirect to "/users"
-      elsif is_authenticated_user
-        erb :'users/profile'
       else
-        @this_user = User.find(params[:id])
         erb :'users/show'
       end
     end
