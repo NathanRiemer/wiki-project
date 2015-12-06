@@ -1,3 +1,7 @@
+body {
+  background-color: skyblue;
+}
+
 div {
   border: 1px solid black;
 }
