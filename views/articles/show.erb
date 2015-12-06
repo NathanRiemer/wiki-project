@@ -1,13 +1,6 @@
 <div class="article">
 
-  <div class="bar">
-    <ul>
-      <li class="active"><%= build_link(["articles", @article.id], "Read") %></li>
-      <li><%= build_link(["articles", @article.id, "edit"], "Edit") %></li>
-      <li><%= build_link(["articles", @article.id, "revisions"], "Revisions") %></li>
-    </ul>
-  </div>
-
+  <%= @article.display_bar("read") %>
 
   <h1><%= @article.title %></h1>
   <div class="toc"><%= $toc_markdown.render(@article.current_content) %></div>

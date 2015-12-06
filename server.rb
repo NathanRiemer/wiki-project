@@ -107,7 +107,11 @@ module App
     get "/articles/:id" do 
       @user = current_user
       @article = Article.find(params[:id])
-      erb :'articles/show'
+      if params[:print] == "true"
+        erb :'articles/show', layout: :print_layout
+      else
+        erb :'articles/show'
+      end
     end
 
     get "/articles/:id/edit" do 

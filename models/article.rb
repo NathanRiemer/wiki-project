@@ -47,4 +47,21 @@ class Article < ActiveRecord::Base
     current_rev.mod_history("Last modified")
   end
 
+  def path 
+    "/articles/#{id}"
+  end
+
+  def display_bar (active)
+    "<div class='bar'>
+      <ul>
+        <li #{"class='active'" if active=="read"}><a href=#{path}>Read</a></li>
+        <li><a href=#{path+'?print=true'} target='_blank'>Print</a></li>
+        <li #{"class='active'" if active=="edit"}><a href=#{path+'/edit'}>Edit</a></li>
+        <li #{"class='active'" if active=="revisions"}><a href=#{path+'/revisions'}>Revisions</a></li>
+      </ul>
+    </div>"
+  end
+
+
+
 end

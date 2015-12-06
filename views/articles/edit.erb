@@ -1,12 +1,6 @@
 <div class="article">
 
-  <div class="bar">
-    <ul>
-      <li><%= build_link(["articles", @article.id], "Read") %></li>
-      <li class="active"><%= build_link(["articles", @article.id, "edit"], "Edit") %></li>
-      <li><%= build_link(["articles", @article.id, "revisions"], "Revisions") %></li>
-    </ul>
-  </div>
+  <%= @article.display_bar("edit") %>
 
   <h1>Edit Article: <%= @article.title %></h1>
 
