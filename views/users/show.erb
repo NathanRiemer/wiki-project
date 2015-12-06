@@ -25,9 +25,9 @@
 <% end %>
 
 <div class="contribution-details">
-  <p>Number of articles contributed to: <%= @this_user.num_articles %></p>
+  <p>Number of unique articles contributed to: <a href="<%= @this_user.path+"/articles"%>"><%= @this_user.num_articles %></a></p>
 
-  <p>Number of article edits: <%= @this_user.num_revisions %></p>
+  <p>Number of edits made: <%= @this_user.num_revisions %></p>
 
   <p>Number of comments: <%= @this_user.num_comments; %></p>
 </div>

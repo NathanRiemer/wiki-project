@@ -92,6 +92,12 @@ module App
       redirect to build_path(["users", @user.id])
     end
 
+    get "/users/:id/articles" do 
+      @user = User.find(params[:id])
+      @articles = @user.articles.uniq
+      erb :'articles/index'
+    end
+
     get "/articles" do
       @user = current_user
       @articles = Article.all.order(:title)

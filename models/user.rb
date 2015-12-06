@@ -24,4 +24,8 @@ class User < ActiveRecord::Base
     is_admin
   end
 
+  def path
+    "/users/#{id}"
+  end
+
 end
