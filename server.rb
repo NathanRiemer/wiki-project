@@ -63,7 +63,7 @@ module App
 
     get "/users" do 
       @user = current_user
-      @users = User.all
+      @users = User.all.order(:username)
       erb :'users/index'
     end
 
