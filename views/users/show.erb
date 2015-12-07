@@ -1,33 +1,40 @@
-<h1><%= @this_user.username %></h1>
+<div class="user">
+  <h1><%= @this_user.username %></h1>
 
-<% if @this_user.admin? %>
-  <p>Admin User</p>
-<% elsif @user.admin? %>
-  <form method="post" action="<%= build_path(["users", @this_user.id]) %>">
-    <input type="hidden" name="_method" value="patch">
-    <input type="hidden" name="is_admin" value="true">
-    <input type="submit" value="Make admin">
-  </form>
-<% end %>
+  <% if @this_user == @user %>
+    <%= build_link(["users", @user.id, "edit"], "Edit Profile") %>
+  <% end %>
 
-<img src="<%= @this_user.avatar_image_url %>">
-<% if @this_user == @user || current_admin? %>
-  <p>Email: <%= @this_user.email %></p>
-  <p>First Name: <%= @this_user.first_name %></p>
-  <p>Last Name: <%= @this_user.last_name %></p>
-  <p>City: <%= @this_user.city %></p>
-  <p>State: <%= @this_user.state %></p>
-  <p>Country: <%= @this_user.country %></p>
-<% end %>
+  <% if @this_user.admin? %>
+    <p>Admin User</p>
+  <% elsif @user.admin? %>
+    <form method="post" action="<%= build_path(["users", @this_user.id]) %>">
+      <input type="hidden" name="_method" value="patch">
+      <input type="hidden" name="is_admin" value="true">
+      <input type="submit" value="Make admin">
+    </form>
+  <% end %>
 
-<% if @this_user == @user %>
-  <%= build_link(["users", @user.id, "edit"], "Edit Profile") %>
-<% end %>
+  <div class="details">
+    <% if @this_user == @user || current_admin? %>
+      <div class="profile">
+        <p>Email: <%= @this_user.email %></p>
+        <p>First Name: <%= @this_user.first_name %></p>
+        <p>Last Name: <%= @this_user.last_name %></p>
+        <p>City: <%= @this_user.city %></p>
+        <p>State: <%= @this_user.state %></p>
+        <p>Country: <%= @this_user.country %></p>
+      </div> <!-- .profile -->
+      <img src="<%= @this_user.avatar_image_url %>">
+    <% end %>
 
-<div class="contribution-details">
-  <p>Number of unique articles contributed to: <a href="<%= @this_user.path+"/articles"%>"><%= @this_user.num_articles %></a></p>
+    <div class="contributions">
+      <p>Number of unique articles contributed to: <a href="<%= @this_user.path+"/articles"%>"><%= @this_user.num_articles %></a></p>
 
-  <p>Number of edits made: <%= @this_user.num_revisions %></p>
+      <p>Number of edits made: <%= @this_user.num_revisions %></p>
 
-  <p>Number of comments: <%= @this_user.num_comments; %></p>
+      <p>Number of comments: <%= @this_user.num_comments; %></p>
+    </div> <!-- .contributions -->
+
+  </div> <!-- details -->
 </div>

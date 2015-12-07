@@ -24,7 +24,9 @@ div {
 
 .side.bar,
 .page-content,
-.toc {
+.toc,
+.details .profile,
+.details img {
   display: inline-block;
   vertical-align: top;
 }
@@ -84,6 +86,14 @@ div {
   width: 90%;
   margin: 0 auto;
   background-color: silver;
+}
+
+.details .profile {
+  width: 48%;
+}
+
+.details img {
+  width: 48%;
 }
 
 
