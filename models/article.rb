@@ -66,6 +66,10 @@ class Article < ActiveRecord::Base
     self.all.select {|article| article.current_content.include? query_string}
   end
 
+  def self.where_title_include?(query_string)
+    self.all.select {|article| article.title.include? query_string}
+  end
+
   def get_previous_revision(rev) 
     if rev == revisions.first
       rev

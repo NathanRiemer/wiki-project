@@ -20,12 +20,16 @@ module App
     get "/search" do 
       @user = current_user
       if params[:q]
+        @searching = true
+        query = params[:q]
         if params[:in] == "articles"
-          @results = Article.where(title: params[:q])
+          @results = Article.where_title_include?(query)
+          @message = "Articles with titles containing '#{query}'"
         elsif params[:in] == "categories"
-          @results = Category.where(title: params[:q])
+          @results = Category.where_title_include?(query)
         elsif params[:in] == "content"
-          @results = Article.where_content_include?(params[:q])
+          @results = Article.where_content_include?(query)
+          @message = "Articles with content containing '#{query}'"
         end
       end
       erb :search

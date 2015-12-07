@@ -1,17 +1,25 @@
-<h1>Search</h1>
+<div class="search">
+  <h1>Search</h1>
 
-<form>
-  <input type="text" name="q">
-  <input type="radio" name="in" value="articles">Article Title
-  <input type="radio" name="in" value="content">Article Content
-  <input type="radio" name="in" value="categories">Category Title
-  <input type="submit">
-</form>
+  <form>
+    <input type="text" name="q">
+    <input type="radio" name="in" value="articles">Article Title
+    <input type="radio" name="in" value="content">Article Content
+    <input type="radio" name="in" value="categories">Category Title
+    <input type="submit">
+  </form>
 
-<% if @results %>
-  <ul>
-    <% @results.each do |result| %>
-      <li><a href="<%= result.path %>"><%= result.title %></a></li>
+  <div class="results">
+    <% if @results && !@results.empty? %>
+      <h3><%= @message %>
+      <ul>
+        <% @results.each do |result| %>
+          <li><a href="<%= result.path %>"><%= result.title %></a></li>
+        <% end %>
+      </ul>
+
+    <% elsif @searching %>
+      <p>0 results found</p>
     <% end %>
-  </ul>
-<% end %>
+  </div> <!-- .results -->
+</div> <!-- .search -->
