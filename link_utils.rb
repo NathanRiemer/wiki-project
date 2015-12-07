@@ -57,6 +57,10 @@ module Sinatra
       end
     end
 
+    def diff_revisions(rev1, rev2)
+      Diffy::Diff.new(rev1.content, rev2.content).to_s(:html)
+    end
+
   end
 
 end

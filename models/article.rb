@@ -66,6 +66,14 @@ class Article < ActiveRecord::Base
     self.all.select {|article| article.current_content.include? query_string}
   end
 
+  def get_previous_revision(rev) 
+    if rev == revisions.first
+      rev
+    else
+      this_index = revisions.index(rev)
+      revisions[this_index - 1]
+    end
+  end
 
 
 end

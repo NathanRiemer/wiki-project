@@ -8,6 +8,7 @@ gem "bcrypt"
 gem "pry"
 gem "redcarpet"
 gem "ffaker"
+gem "diffy"
 group :development do
   gem "sqlite3"
 end

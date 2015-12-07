@@ -5,6 +5,21 @@
     <p><%= @revision.mod_history("Modified") %></p>
     <h2><%= @article.title %></h2>
 
+    <button class="diff-button prev">Diff with previous version</button>
+    <button class="diff-button curr">Diff with current version</button>
+
+    <div class="diffs">
+      <div class="prev-diff hidden">
+        <h3>Diff with previous revision</h3>
+        <%= diff_revisions(@article.get_previous_revision(@revision), @revision) %>
+      </div> <!-- .prev-diff.hidden -->
+
+      <div class="curr-diff hidden">
+        <h3>Diff with current revision</h3>
+        <%= diff_revisions(@revision, @article.current_rev) %>
+      </div> <!-- .curr-diff.hidden -->
+    </div> <!-- .diffs -->
+
     <div class="toc"><%= $toc_markdown.render(@revision.content) %></div>
     <% if @revision.primary_image_url %>
       <img src="<%= @revision.primary_image_url %>">
