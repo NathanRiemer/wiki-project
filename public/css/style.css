@@ -1,5 +1,6 @@
 body {
   background-color: skyblue;
+  font-family: sans-serif;
 }
 
 div {
@@ -32,7 +33,7 @@ div {
 }
 
 .side.bar {
-  width: 80px;
+  width: 90px;
   background-color: grey;
 
 }
@@ -94,6 +95,10 @@ div {
 
 .details img {
   width: 48%;
+}
+
+.content {
+  padding: 10px;
 }
 
 

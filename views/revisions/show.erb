@@ -3,6 +3,7 @@
 
   <div class="revision">
     <p><%= @revision.mod_history("Modified") %></p>
+    <h2><%= @article.title %></h2>
 
     <div class="toc"><%= $toc_markdown.render(@revision.content) %></div>
     <% if @revision.primary_image_url %>
@@ -14,8 +15,7 @@
     </div>
   </div>
 
-  <h4>Comments: </h4>
-  <button class="comment toggler">Toggle Comments</button>
+  <h4>Comments: <button class="comment toggler">Toggle Comment View</button></h4>
   <div class="comments">
     <% @revision.comments.each_with_index do |comment, index| %>
       <div class="comment">
