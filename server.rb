@@ -27,6 +27,7 @@ module App
           @message = "Articles with titles containing '#{query}'"
         elsif params[:in] == "categories"
           @results = Category.where_title_include?(query)
+          @message = "Categories with titles containing '#{query}'"
         elsif params[:in] == "content"
           @results = Article.where_content_include?(query)
           @message = "Articles with content containing '#{query}'"
