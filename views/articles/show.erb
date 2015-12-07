@@ -3,14 +3,19 @@
   <%= @article.display_bar("read") %>
 
   <h1><%= @article.title %></h1>
-  <div class="toc"><%= $toc_markdown.render(@article.current_content) %></div>
-  <img src="<%= @article.current_image %>">
+  <div class="toc">
+    <h3>Table of contents</h3>
+    <%= $toc_markdown.render(@article.current_content) %>
+  </div>
+  <% if @article.current_image %>
+    <img src="<%= @article.current_image %>">
+  <% end %>
 
-  <div class="article content">
+  <div class="content">
     <%= $markdown.render(@article.current_content) %>
   </div>
 
-  <div class="article categories">
+  <div class="categories">
     <h3>Categories:<%= build_link(["articles", @article.id, "categories", "edit"], "Edit categories") %></h3>
 
     <ul>
@@ -22,7 +27,7 @@
 
   </div>
 
-  <div class="article data">
+  <div class="data">
     <p><%= @article.creation_history %></p>
     <p><%= @article.current_history %></p>
   </div>

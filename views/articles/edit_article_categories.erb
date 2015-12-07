@@ -1,17 +1,23 @@
-<h5>Categories:</h5>
-  <ul>
-    <% @article.categories.each do |category| %>
-      <li><%= build_link(["categories", category.id], category.title) %>
-        <form method="POST" action="<%= build_path(["articles", @article.id, "categories", category.id]) %>">
-          <input type="hidden" name="_method" value="delete">
-          <input type="submit" value="Remove">
-        </form>
-      </li>
-    <% end %>
-  </ul>
+<div class="article">
+  <%= @article.display_bar("edit") %>
 
-<p>Add categories to this article:</p>
-<form method="POST" action="<%= build_path(["articles", @article.id, "categories"]) %>">
-  <%= new_input("categories") %>
-  <input type="submit">
-</form>
+  <h5>Categories:</h5>
+    <ul>
+      <% @article.categories.each do |category| %>
+        <li><%= build_link(["categories", category.id], category.title) %>
+          <form method="POST" action="<%= build_path(["articles", @article.id, "categories", category.id]) %>" class="inline-btn">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="Remove">
+          </form>
+        </li>
+      <% end %>
+    </ul>
+
+  <p>Add categories to this article:</p>
+  <form method="POST" action="<%= build_path(["articles", @article.id, "categories"]) %>">
+    <label>Categories: <a href="#" title="Some text">?</a>
+      <input type="text" name="categories">
+    </label>
+    <input type="submit">
+  </form>
+</div>

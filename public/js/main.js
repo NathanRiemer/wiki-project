@@ -1,4 +1,4 @@
-$('document').ready(function() {
+$(document).ready(function() {
   $commentToggler = $('.comment.toggler');
   $commentsDiv = $('.comments');
   $commentToggler.click(function() {

@@ -5,15 +5,17 @@
     <p><%= @revision.mod_history("Modified") %></p>
 
     <div class="toc"><%= $toc_markdown.render(@revision.content) %></div>
-    <img src="<%= @revision.primary_image_url %>">
+    <% if @revision.primary_image_url %>
+      <img src="<%= @revision.primary_image_url %>">
+    <% end %>
 
-    <div class="article content">
+    <div class="content">
       <%= $markdown.render(@revision.content) %>
     </div>
   </div>
 
   <h4>Comments: </h4>
-  <button class="comment toggler">Hide Comments</button>
+  <button class="comment toggler">Toggle Comments</button>
   <div class="comments">
     <% @revision.comments.each_with_index do |comment, index| %>
       <div class="comment">

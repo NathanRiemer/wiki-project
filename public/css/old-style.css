@@ -6,14 +6,16 @@ div {
   border: 1px solid black;
 }
 
-.article {
-  border: 1px dashed green;
-}
-
 .top.bar {
   position: relative;
   top: 0;
   width: 100%;
+}
+
+.bar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .top.bar li,
@@ -22,17 +24,15 @@ div {
   display: inline;
 }
 
-.side.bar,
-.page-content,
-.toc {
+.side.bar {
   display: inline-block;
-  vertical-align: top;
+  height: 100%;
+  /*width: 10%;*/
+  width: 19%;
 }
 
-.side.bar {
-  width: 80px;
-  background-color: grey;
-
+.side.bar ul {
+  background-color: skyblue;
 }
 
 .side.bar li a{
@@ -47,20 +47,15 @@ div {
 }
 
 .page-content {
-  width: 80%;
   background-color: blanchedalmond;
-}
-
-.bar ul,
-.revisions ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+  display: inline-block;
+  vertical-align: top;
+  width: 79%;
 }
 
 .article img {
   display: inline-block;
-  width: 50%;
+  width: 30%;
 }
 
 .active {
@@ -72,18 +67,10 @@ div {
 }
 
 .toc {
-  min-width: 40%;
-  height: 100%;
+  float: left;
 }
 
-.inline-btn {
-  display: inline;
+.category-helper {
+  border: 1px dashed black;
+  border-radius: 5px;
 }
-
-.categories {
-  width: 90%;
-  margin: 0 auto;
-  background-color: silver;
-}
-
-

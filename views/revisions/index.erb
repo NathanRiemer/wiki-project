@@ -1,21 +1,24 @@
 <div class="article">
   <%= @article.display_bar("revisions") %>
-
+  <div class="revisions">
   <h1>Revisions for <%= @article.title %></h1>
-
+  <ul>
   <% @article.revisions.each_with_index do |revision, index| %>
+    <li>
     <% if index == 0 %>
-      <p><%= revision.mod_history_with_date_link("Created") %></p>
+      <%= revision.mod_history_with_date_link("Created") %>
     <% else %>
-      <p><%= revision.mod_history_with_date_link("Modified") %></p>
+      <%= revision.mod_history_with_date_link("Modified") %>
     <% end %>
     <% if current_admin? && index != @article.revisions.length - 1 %>
-      <form method="POST" action="<%= build_path(["articles", @article.id, "revisions"])%>">
+      <form method="POST" action="<%= build_path(["articles", @article.id, "revisions"])%>" class="inline-btn">
         <input type="hidden" name="revision_id" value="<%= revision.id %>">
         <input type="submit" value = "Revert to this revision">
       </form>
     <% end %>
-
+    </li>
   <% end %>
+  </ul>
+  </div> <!-- .revisions -->
 
-</div>
+</div> <!-- .article -->
