@@ -58,7 +58,12 @@ module Sinatra
     end
 
     def diff_revisions(rev1, rev2)
-      Diffy::Diff.new(rev1.content, rev2.content).to_s(:html)
+      diff = Diffy::Diff.new(rev1.content, rev2.content, :include_plus_and_minus_in_html => true).to_s(:html)
+      if diff == '<div class="diff"></div>'
+        '<div class="diff"><ul><li class="unchanged"><span>Content is unchanged</span></li></ul></div>'
+      else
+        diff
+      end
     end
 
   end

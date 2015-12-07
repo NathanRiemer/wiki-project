@@ -101,7 +101,8 @@ div {
   padding: 10px;
 }
 
-.hidden {
+.prev-diff,
+.curr-diff {
   display: none;
 }
 

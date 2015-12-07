@@ -9,12 +9,12 @@
     <button class="diff-button curr">Diff with current version</button>
 
     <div class="diffs">
-      <div class="prev-diff hidden">
+      <div class="prev-diff">
         <h3>Diff with previous revision</h3>
         <%= diff_revisions(@article.get_previous_revision(@revision), @revision) %>
       </div> <!-- .prev-diff.hidden -->
 
-      <div class="curr-diff hidden">
+      <div class="curr-diff">
         <h3>Diff with current revision</h3>
         <%= diff_revisions(@revision, @article.current_rev) %>
       </div> <!-- .curr-diff.hidden -->
