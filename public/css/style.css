@@ -3,14 +3,6 @@ body {
   font-family: sans-serif;
 }
 
-div {
-  border: 1px solid black;
-}
-
-.article {
-  border: 1px dashed green;
-}
-
 .top.bar {
   position: relative;
   top: 0;
@@ -52,6 +44,7 @@ div {
 .page-content {
   width: 80%;
   background-color: blanchedalmond;
+  border: 1px solid black;
 }
 
 .bar ul,

@@ -3,7 +3,7 @@ class Category < ActiveRecord::Base
   validates :title, uniqueness: true
 
   def path
-    "/categories/#{id}"
+    invalid? ? "/categories" : "/categories/#{id}"
   end
 
   def self.popular

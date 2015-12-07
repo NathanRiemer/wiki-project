@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   end
 
   def path
-    "/users/#{id}"
+    invalid? ? "/users" : "/users/#{id}"
   end
 
 end

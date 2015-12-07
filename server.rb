@@ -6,10 +6,8 @@ module App
     $markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(with_toc_data: true), autolink: true)
     $toc_markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML_TOC, extensions={})
 
-    # def markdown_renderer
-    #   @markdown_renderer || @markdown_renderer = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {})
-    # end
 
+    # Index
     get "/" do
       @user = current_user
       @intro = Article.find_by(title: "Welcome")
@@ -17,6 +15,7 @@ module App
       erb :index
     end
 
+    # Search
     get "/search" do 
       @user = current_user
       if params[:q]
@@ -36,13 +35,14 @@ module App
       erb :search
     end
 
+    # User log in/out and creation
     get "/login" do 
       @message = "Login failed. Incorrect username and/or password." if params[:msg] == "failure"
       erb :'users/login'
     end
 
     post "/sessions" do 
-      user = User.find_by({username: params[:username]}).try(:authenticate, params[:password])
+      user = User.find_by(username: params[:username]).try(:authenticate, params[:password])
       if user
         session[:user_id] = user.id
         redirect to "/"
@@ -61,11 +61,12 @@ module App
     end
 
     post "/users" do 
-      user = User.create({username: params[:username], password: params[:password], password_confirmation: params[:password_confirmation], email: params[:email]})
+      user = User.create(username: params[:username], password: params[:password], password_confirmation: params[:password_confirmation], email: params[:email])
       session[:user_id] = user.id
-      redirect to "/users/#{user.id}"
+      redirect to user.path
     end
 
+    # User routes
     get "/users" do 
       @user = current_user
       @users = User.all.order(:username)
@@ -89,13 +90,13 @@ module App
     end
 
     patch "/users/:id" do
-      @user = User.find(params[:id])
+      user = User.find(params[:id])
       if params[:is_admin] == "true"
-        @user.update(is_admin: true)
+        user.update(is_admin: true)
       else
-        edit_user(@user)
+        edit_user(user)
       end
-      redirect to build_path(["users", @user.id])
+      redirect to user.path
     end
 
     get "/users/:id/articles" do 
@@ -105,6 +106,7 @@ module App
       erb :'articles/index'
     end
 
+    #Article routes
     get "/articles" do
       @user = current_user
       @articles = Article.all.order(:title)
@@ -148,7 +150,7 @@ module App
       user = current_user
       article = Article.find(params[:id])
       article.update(title: params[:title])
-      redirect to build_path(["articles", article.id])
+      redirect to article.path
     end
 
     delete "/articles/:id" do 
@@ -158,18 +160,20 @@ module App
       redirect to "/articles"
     end
 
+    # Articles - Revision routes
     post "/articles/:id/revisions" do 
       redirect to "/articles" if !session[:user_id]
       user = current_user
       article = Article.find(params[:id])
       if params[:revision_id]
+        # Triggered by the revert to this revision button
         revision = Revision.find(params[:revision_id]).dup
         revision.created_at = DateTime.now
         revision.save
       else
         revision = Revision.create(content: params[:content], created_at: DateTime.now, user_id: user.id, article_id: article.id, primary_image_url: params[:primary_image_url])
       end 
-      redirect to build_path(["articles", article.id])
+      redirect to article.path
     end
 
     get "/articles/:id/revisions" do 
@@ -185,23 +189,27 @@ module App
       erb :'revisions/show'
     end
 
+    # Articles - Revisions - Comments routes
     post "/articles/:id/revisions/:rev_id/comments" do 
-      redirect to build_path(["articles", params[:id], "revisions", params[:rev_id]]) if !session[:user_id]
       revision = Revision.find(params[:rev_id])
+      if session[:user_id]
       Comment.create(content: params[:content], created_at: DateTime.now, user_id: session[:user_id], revision_id: params[:rev_id])
-      redirect to build_path(["articles", params[:id], "revisions", params[:rev_id]])
+      end
+      redirect to revision.path
     end
 
-    delete "/articles/:id/revisions/:rev_id/comments/:comment_id" do 
+    delete "/articles/:id/revisions/:rev_id/comments/:comment_id" do
+      revision = Revision.find(params[:rev_id]) 
       comment = Comment.find(params[:comment_id])
       comment.delete
-      redirect to build_path(["articles", params[:id], "revisions", params[:rev_id]])
+      redirect to revision.path
     end
 
+    # Articles - Category routes
     post "/articles/:id/categories" do 
       @article = Article.find(params[:id])
       add_categories_to_article
-      redirect to build_path(["articles", params[:id]])
+      redirect to @article.path
     end
 
     get "/articles/:id/categories/edit" do 
@@ -214,9 +222,10 @@ module App
       article = Article.find(params[:id])
       category = Category.find(params[:cat_id])
       article.categories.delete(category)
-      redirect to build_path(["articles", article.id])
+      redirect to article.path
     end
 
+    # Category routes
     get "/categories" do 
       @user = current_user
       @categories = Category.all.order(:title)
@@ -231,7 +240,7 @@ module App
 
     post "/categories" do 
       category = Category.create(title: params[:title])
-      redirect to build_path(["categories", category.id])
+      redirect to category.path
     end
 
     get "/categories/:id" do 
@@ -250,7 +259,7 @@ module App
     patch "/categories/:id" do 
       category = Category.find(params[:id])
       category.update(title: params[:title])
-      redirect to build_path(["categories", params[:id]])
+      redirect to category.path
     end
 
     delete "/categories/:id" do 
