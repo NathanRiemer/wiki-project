@@ -1,12 +1,12 @@
 <h1><%= @category.title %></h1>
-<form method="POST" action="<%= build_path(["categories", @category.id]) %>">
+<form method="POST" action="<%= @category.path %>">
   <input type="hidden" name="_method" value="patch">
   <%= edit_input(@category, "title") %>
   <input type="submit" value="Update title">
 </form>
 
 <% if current_admin? %>
-  <form method="POST" action="<%= build_path(["categories", @category.id]) %>">
+  <form method="POST" action="<%= @category.path %>">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete category">
   </form>
