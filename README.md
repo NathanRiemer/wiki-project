@@ -71,37 +71,49 @@ See files in wireframes folder.
 
 ### ERD/Data Models
 
+Original ERD model:
 ![ERD Image]
 (/docs/wiki_erd.png)
+
+Current 
 
 User
 
 -  username
--  password
+-  password (password_digest)
 -  email
+-  first_name
+-  last_name
+-  avatar_image_url
+-  city
+-  state
+-  country
+-  is_admin
 
 Article
 
 -  title
 
 Revision
----------
--content
--datetime_created
--article_id
--user_id
+
+-  content
+-  datetime_created
+-  article_id
+-  user_id
+-  primary_image_url
 
 Category
---------
--title
 
-Article Category
-----------------
--category_id
--article_id
+-  title
+
+Articles Category
+
+-  category_id
+-  article_id
 
 Comment
--------
--content
--user_id
--revision_id
+
+-  content
+-  created_at
+-  user_id
+-  revision_id
