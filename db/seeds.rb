@@ -1,5 +1,4 @@
 require_relative "config"
-require "pry"
 
 User.destroy_all
 Article.destroy_all
