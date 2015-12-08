@@ -15,7 +15,7 @@
 
   <p>Add categories to this article:</p>
   <form method="POST" action="<%= build_path(["articles", @article.id, "categories"]) %>">
-    <label>Categories: <a href="#" title="Some text">?</a>
+    <label>Categories: <a href="#" title="Separate category names with commas">?</a>
       <input type="text" name="categories">
     </label>
     <input type="submit">
