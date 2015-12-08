@@ -48,6 +48,7 @@ MVP features:
 11.  Users can see all the articles in a given category.
 
 Secondary features:
+
 1.  A user can search by article title, article content, or category title.
 2.  A user can view a printable version of an article.
 3.  A user can view previous revisions of articles.
@@ -64,16 +65,24 @@ Secondary features:
 14.  A user can remove categories from an article.
 15.  An admin user can edit the title of a category.
 
+### Front-End Wireframes
+
+See files in wireframes folder.
+
+### ERD/Data Models
+
+![ERD Image]
+(/docs/wiki_erd.png)
 
 User
-----
--username
--password
--email
+
+-  username
+-  password
+-  email
 
 Article
--------
--title
+
+-  title
 
 Revision
 ---------
