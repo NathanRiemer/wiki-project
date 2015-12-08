@@ -67,7 +67,7 @@ Secondary features:
 
 ### Front-End Wireframes
 
-See files in wireframes folder.
+See wireframes pdf.
 
 ### ERD/Data Models
 
